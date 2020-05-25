@@ -1,0 +1,19 @@
+{
+  "name": "sreality-scraping",
+  "version": "1.0.0",
+  "description": "Scraping internet to get all the data of sreality website",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Hamid Rasool",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "nightmare": "^3.0.2",
+    "trello": "^0.10.0"
+  }
+}
