@@ -5,11 +5,11 @@ const Nightmare = require("nightmare");
 const scraping = (url) => {
 	
 	// All scraping will be done here
-	let nightmare = new Nightmare({show: false, waitTimeout: 50000});
+	let nightmare = new Nightmare({show: false});
 	const nightmarePromise = new Promise( (resolve, reject) => {
 		nightmare
 			.goto(url)
-			.wait("#page-layout > div.content-cover > div.content-inner > div.transcluded-content > div.ng-scope > div.property-detail > div.content > div > div.ng-isolate-scope[answer-form='resource'] > div.answer-form > div.contacts")
+			.wait("#page-layout > div.content-cover > div.content-inner > div.transcluded-content > div.ng-scope > div.property-detail > div.content > div > div.ng-isolate-scope[answer-form='resource'] > div.answer-form > div.contacts", 50000)
 			.click("#page-layout > div.content-cover > div.content-inner > div.transcluded-content > div.ng-scope > div.property-detail > div.content > div > div.ng-isolate-scope[answer-form='resource'] > div.answer-form > div.contacts > div.seller-contact > div.contacts > ul.contact-list > li.contact-item.phone > button.value.interactive")
 			.click("#page-layout > div.content-cover > div.content-inner > div.transcluded-content > div.ng-scope > div.property-detail > div.content > div > div.ng-isolate-scope[answer-form='resource'] > div.answer-form > div.contacts > div.seller-contact > div.contacts > ul.contact-list > li.contact-item.email > button.value.interactive")
 			.evaluate(() => {
