@@ -50,7 +50,7 @@ app.get("/puppet", async function(req, res) {
 });
 
 //Starting server
-let port = 8000;
+let port = 3000;
 app.listen(port, () => {
 	console.log(`Express server started. Listening to port: ${port}`);
 });
