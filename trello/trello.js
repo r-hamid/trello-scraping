@@ -57,7 +57,9 @@ function saveAllCards(allCards) {
 
 function updateCard(card) {
 
-	let name = card.scrappedData.title;
+	let price = card.scrappedData.price.replace(/\s/g, '');
+	price = price.replace(/\D/g,'');
+	let name = card.scrappedData.title+"("+(price/1000)+")";
 	let desc = card.scrappedData.description+"\n\n"+card.scrappedData.customer.name+"\n"+"Mail: "+card.scrappedData.customer.email+"\n"+"Phone: " + card.scrappedData.customer.phone;
 	query = "name="+name+"&desc="+desc;
 	let promise = new Promise ( (resolve, reject) => {
