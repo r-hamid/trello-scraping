@@ -8,18 +8,14 @@ const annonce = require("./webScraping/annonce");
 const app = express();
 
 app.get("/", function(req, res) {
+	
 	let allCards = trello.getCards();
 	allCards.then( (allCards) => {
 		if(allCards) {
-
-			let cardsData = [];
-			for (let index = 0; index < allCards.length; index++) {
-				cardsData.push({
-					URL: allCards[index].desc,
-					scrapingResult: allCards[index].scrappedData
-				});
-			}
-			res.send(cardsData);
+			let promise = trello.saveAllCards(allCards);
+			promise.then( () => {
+				res.send(" Cards Updated Successfully");
+			});
 		}
 		else res.send("Something went wrong");
 	});
@@ -48,15 +44,11 @@ app.get("/connectToTrello", function(req, res) {
 		});
 
 	});
-});
 
-app.get("/puppet", async function(req, res) {
-	let scrappedData = [];
-	scrappedData.push(await puppeteer.scraping("https://www.sreality.cz/detail/prodej/byt/1+1/chomutov-chomutov-holesicka/1528512092#img=0&fullscreen=false"));
-	res.send(scrappedData);
 });
 
 //Starting server
-app.listen("3000", () => {
-	console.log(`Express server started. Listening to port: 3000`);
+let port = 3000;
+app.listen(port, () => {
+	console.log(`Express server started. Listening to port: ${port}`);
 });
