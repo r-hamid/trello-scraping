@@ -2,6 +2,7 @@
 const express = require("express");
 const trello = require("./trello/trello");
 const nightmare = require("./webScraping/nightmare");
+const annonce = require("./webScraping/annonce");
 
 // Defining variables and setting others to kick start the server
 const app = express();
@@ -22,6 +23,12 @@ app.get("/", function(req, res) {
 		}
 		else res.send("Something went wrong");
 	});
+});
+
+app.get("/annonce", async function(req, res) {
+	let scrappedData = {};
+	scrappedData = await annonce.scraping("https://www.annonce.cz/inzerat/prodej-byt-2-1-sokolov-49765983-wudyrm.html");
+	res.send(scrappedData);
 });
 
 app.get("/scrape", async function(req, res) {
