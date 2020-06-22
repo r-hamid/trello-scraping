@@ -1,8 +1,9 @@
 // Required Libraries
 const express = require("express");
 const trello = require("./trello/trello");
-const nightmare = require("./webScraping/nightmare");
 const annonce = require("./webScraping/annonce");
+const idnes = require("./webScraping/idnes")
+const nightmare = require("./webScraping/nightmare");
 
 // Defining variables and setting others to kick start the server
 const app = express();
@@ -33,18 +34,10 @@ app.get("/scrape", async function(req, res) {
 	res.send(scrappedData);
 });
 
-app.get("/connectToTrello", function(req, res) {
-	let allCards = trello.getCards();
-	allCards.then( (allCards) => {
-		
-		let saveCardPromise = trello.saveDataToCard(allCards);
-
-		saveCardPromise.then( () => {
-			(allCards) ? res.send(allCards) : res.send("Check console for errors");
-		});
-
-	});
-
+app.get("/idnes", async function(req, res) {
+	let scrappedData = [];
+	scrappedData.push(await idnes.scraping("https://reality.idnes.cz/detail/prodej/byt/sokolov-sokolovska/5ee3360c558f0707a50f2e27/?page=1287"));
+	res.send(scrappedData);
 });
 
 //Starting server
