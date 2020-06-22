@@ -4,6 +4,7 @@ const trello = require("./trello/trello");
 const annonce = require("./webScraping/annonce");
 const idnes = require("./webScraping/idnes")
 const nightmare = require("./webScraping/nightmare");
+const bazos = require("./webScraping/bazos");
 
 // Defining variables and setting others to kick start the server
 const app = express();
@@ -37,6 +38,12 @@ app.get("/scrape", async function(req, res) {
 app.get("/idnes", async function(req, res) {
 	let scrappedData = [];
 	scrappedData.push(await idnes.scraping("https://reality.idnes.cz/detail/prodej/byt/sokolov-sokolovska/5ee3360c558f0707a50f2e27/?page=1287"));
+	res.send(scrappedData);
+});
+
+app.get("/bazos", async function(req, res) {
+	let scrappedData = [];
+	scrappedData.push(await bazos.scraping("https://reality.bazos.cz/inzerat/120852980/prodej-11-v-sokolove.php"));
 	res.send(scrappedData);
 });
 
