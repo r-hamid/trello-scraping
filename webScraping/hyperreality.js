@@ -17,40 +17,42 @@ const scraping = (url) => {
 			})
 			.end()
 			.then(response => {
-				console.log("Got here");
 				const html = response;
 				var $ = cheerio.load(html);
 				var json = { title: "", picture: "", price: "", description: "", customer: { name: "", email: "", phone: "" } };
+				let baseURL = "https://www.hyperreality.cz";
 
-				// let core = ".pt-20 > div.row-main > div.m-auto.mw-860";
-				// // extracting data
-				// $(core + " > header.b-detail > h1.b-detail__title").filter(function() {
-				// 	var title = $(this).text();
-				// 	title = title.replace(/\r?\n|\r/g, "");
-				// 	json.title = title;
-				// });
-				// $(core + " > div.b-desc > p:nth-of-type(1) ").filter(function() {
-				// 	var desc = $(this).text().trim();
-				// 	json.description = desc;
-				// });
-				// $(".b-gallery.carousel > div.b-gallery__img-lg > div.carousel__list > div.slick-list > div.slick-track > a.slick-active").filter(function() {
-				// 	let image = $(this).attr("href");
-				// 	json.picture = image;
-				// });
-				// $(core + " > header.b-detail > p.b-detail__price > strong").filter(function() {
-				// 	var price = $(this).text();
-				// 	json.price = price;
-				// });
-				// $(core + " > div.b-detail-contact > div.grid.grid--wider > div.grid__cell > div.b-author > div.b-author__content").filter(function() {
-				// 	let data = $(this);
-				// 	let customerName = data.find("h2.b-author__title > a").text().trim();
-				// 	let customerEmail = data.find("p.b-author__info:nth-of-type(2) > span > strong > span > a").text().trim();
-				// 	let customerPhone = data.find("p.b-author__info:nth-of-type(3) > span > strong > span > a").text().trim();
-				// 	json.customer.name = customerName;
-				// 	json.customer.phone = customerPhone;
-				// 	json.customer.email = customerEmail;
-				// 	console.log("Executed");
-				// });
+				// extracting data
+				$(".row > div.skyscraper-placeholder > h1.detail__title").filter(function() {
+					var title = $(this).text();
+					title = title.replace(/  +/g, " ");
+					json.title = title;
+				});
+				$("#detail > div.forText > div.detail__text > p").filter(function() {
+					var desc = $(this).text().trim();
+					json.description = desc;
+				});
+				$(".detail__gallery__left > div#detail__carousel > div.carousel-inner > div.item:first-of-type > div > a").filter(function() {
+					let image = $(this).attr("href");
+					json.picture = baseURL + image;
+				});
+				$("#detail > div.forText > div.row > div.col-sm-8 > h2.detail__price").filter(function() {
+					var price = $(this).text();
+					price = price.replace(/\r?\n|\r|\t/g, "");
+					json.price = price;
+				});
+				$(".row:last-of-type > div.col-sm-6 > div.detail__contact").filter(function() {
+					let data = $(this);
+					let customerName = data.children().find("div.detail__contact__name > a").text().trim();
+					let phoneEmail = data.children().find("div.detail__contact__text > span.hide-contact").text().trim();
+					phoneEmail = phoneEmail.replace(/\r?\n|\r|\t/g, " ");
+					phoneEmail = phoneEmail.replace(/  +/g, " ");
+					customerPhone = phoneEmail.split(" ")[0] + " " + phoneEmail.split(" ")[1];
+					customerEmail = phoneEmail.split(" ")[2];
+					json.customer.name = customerName;
+					json.customer.phone = customerPhone;
+					json.customer.email = customerEmail;
+				});
 
 				nightmare = null;
 				resolve(json);
