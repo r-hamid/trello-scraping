@@ -1,10 +1,11 @@
 // Required Libraries
 const express = require("express");
 const trello = require("./trello/trello");
-const annonce = require("./webScraping/annonce");
-const idnes = require("./webScraping/idnes")
-const nightmare = require("./webScraping/nightmare");
+const idnes = require("./webScraping/idnes");
 const bazos = require("./webScraping/bazos");
+const annonce = require("./webScraping/annonce");
+const viareality = require("./webScraping/viareality");
+const nightmare = require("./webScraping/nightmare");
 
 // Defining variables and setting others to kick start the server
 const app = express();
@@ -44,6 +45,11 @@ app.get("/idnes", async function(req, res) {
 app.get("/bazos", async function(req, res) {
 	let scrappedData = [];
 	scrappedData.push(await bazos.scraping("https://reality.bazos.cz/inzerat/120852980/prodej-11-v-sokolove.php"));
+	res.send(scrappedData);
+});
+app.get("/viareality", async function(req, res) {
+	let scrappedData = [];
+	scrappedData.push(await viareality.scraping("https://www.viareality.cz/detail/prodej-byt-21-panel-53-m2-habartov/4074568"));
 	res.send(scrappedData);
 });
 
