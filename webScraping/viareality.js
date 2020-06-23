@@ -10,6 +10,7 @@ const scraping = (url) => {
 		nightmare
 			.goto(url)
 			.wait("vre-app > div > property-detail-page > div.property-detail > vre-property-detail > div.container > div.row")
+			// .click("vre-app > div > property-detail-page > div.property-detail > vre-property-detail > div.container > div.row > div.main-info:last-of-type > div.contact > div.row > div.col-xs-12 > vre-modal > vre-modal-open-link > a.open-link")
 			.evaluate(() => {
 				let html = document.querySelector("vre-app > div > property-detail-page > div.property-detail > vre-property-detail > div.container > div.row").innerHTML;
 				return html;
@@ -38,13 +39,15 @@ const scraping = (url) => {
 					var price = $(this).text().trim();
 					json.price = price;
 				});
-				$(".main-info:last-of-type > div.contact > div.row > div.col-xs-12 > vre-modal > div.modal > div.modal-dialog > div.modal-content > div.modal-body > div > div.broker-modal-body > div.broker-modal-block > div.row:first-of-type > div.broker-info").filter(function() {
-					let data = $(this);
-					let customerName = data.find(".broker-name").text().trim();
-					let customerPhone = data.find(".phone").text().trim();
-					console.log("Phone: ", customerPhone);
-					json.customer.name = customerName;
-					json.customer.phone = customerPhone;
+				$(".main-info:last-of-type > div.contact > div.row > div:last-of-type").filter(function() {
+					console.log("Entered");
+					let data = $(this).children().last();
+					let modalData = data.find("div.modal > div.modal-dialog > div.modal-content > div.modal-body > div > div.broker-modal-body > div.broker-modal-block > div.row > div.broker-info");
+					console.log("Fucking Vre: ", modalData.children("div.broker-name").attr());
+					// let customerName = data.find(".broker-name").text().trim();
+					// let customerPhone = data.find(".phone").text().trim();
+					// json.customer.name = customerName;
+					// json.customer.phone = customerPhone;
 				});
 
 				nightmare = null;
