@@ -4,6 +4,7 @@ const trello = require("./trello/trello");
 const annonce = require("./webScraping/annonce");
 const idnes = require("./webScraping/idnes")
 const nightmare = require("./webScraping/nightmare");
+const sreality = require("./webScraping/sreality");
 const bazos = require("./webScraping/bazos");
 const hyperreality = require("./webScraping/hyperreality");
 
@@ -32,7 +33,7 @@ app.get("/annonce", async function(req, res) {
 
 app.get("/scrape", async function(req, res) {
 	let scrappedData = [];
-	scrappedData.push(await nightmare.scraping("https://www.sreality.cz/detail/prodej/byt/1+1/chomutov-chomutov-holesicka/1528512092#img=0&fullscreen=false"));
+	scrappedData.push(await sreality.scraping("https://www.sreality.cz/detail/prodej/byt/1+1/chomutov-chomutov-holesicka/1528512092#img=0&fullscreen=false"));
 	res.send(scrappedData);
 });
 
@@ -44,7 +45,8 @@ app.get("/idnes", async function(req, res) {
 
 app.get("/bazos", async function(req, res) {
 	let scrappedData = [];
-	scrappedData.push(await bazos.scraping("https://reality.bazos.cz/inzerat/120852980/prodej-11-v-sokolove.php"))
+	scrappedData.push(await bazos.scraping("https://reality.bazos.cz/inzerat/120852980/prodej-11-v-sokolove.php"));
+	res.send(scrappedData);
 });
 
 app.get("/hyperreality", async function(req, res) {
