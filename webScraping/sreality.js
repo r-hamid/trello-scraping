@@ -21,7 +21,7 @@ const scraping = (url) => {
 			.then(response => {
 				const html = response;
 				var $ = cheerio.load(html);
-				var json = { title: "", picture: "", price: "", description: "", release: "", customer: { name: "", email: "", phone: "" } };
+				var json = { title: "", picture: "", price: "", description: "", customer: { name: "", email: "", phone: "" } };
 
 				// extracting data
 				$(".property-title").filter(function() {
@@ -43,10 +43,6 @@ const scraping = (url) => {
 				$("div.gallery > div.detail-images > div.image-cover > div.image.active > img").filter(function() {
 					var image = $(this).attr("src");
 					json.picture = image;
-				});
-				$(".params > ul.params1 > li:nth-child(4)").filter(function() {
-					var data = $(this).children().last().text().trim();
-					json.release = data;
 				});
 				$(".ng-isolate-scope[answer-form='resource']").filter(function() {
 					var data = $($(this)+" > div.answer-form > div.contacts > div.seller-contact");

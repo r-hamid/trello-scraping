@@ -5,7 +5,7 @@ let OUTPUT_LIST = "";
 
 // All libraries
 const Trello = require("trello");
-const nightmare = require("../webScraping/nightmare");
+const nightmare = require("../webScraping");
 
 // Create trello class object
 const trello = new Trello(APP_KEY, USER_TOKEN);
