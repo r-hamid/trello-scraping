@@ -1,8 +1,10 @@
 // Required Libraries
 const express = require("express");
 const trello = require("./trello/trello");
+const idnes = require("./webScraping/idnes");
+const bazos = require("./webScraping/bazos");
 const annonce = require("./webScraping/annonce");
-const idnes = require("./webScraping/idnes")
+const viareality = require("./webScraping/viareality");
 const nightmare = require("./webScraping/nightmare");
 const sreality = require("./webScraping/sreality");
 const bazos = require("./webScraping/bazos");
@@ -52,6 +54,11 @@ app.get("/bazos", async function(req, res) {
 app.get("/hyperreality", async function(req, res) {
 	let scrappedData = [];
 	scrappedData.push(await hyperreality.scraping("https://www.hyperreality.cz/inzerat/detail/7696467-prodej-byt-2-1-54-m-sokolov-ul-sokolovska"));
+	res.send(scrappedData);
+});
+app.get("/viareality", async function(req, res) {
+	let scrappedData = [];
+	scrappedData.push(await viareality.scraping("https://www.viareality.cz/detail/prodej-byt-21-panel-53-m2-habartov/4074568"));
 	res.send(scrappedData);
 });
 
