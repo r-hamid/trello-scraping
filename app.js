@@ -6,6 +6,8 @@ const bazos = require("./webScraping/bazos");
 const annonce = require("./webScraping/annonce");
 const viareality = require("./webScraping/viareality");
 const nightmare = require("./webScraping/nightmare");
+const bazos = require("./webScraping/bazos");
+const hyperreality = require("./webScraping/hyperreality");
 
 // Defining variables and setting others to kick start the server
 const app = express();
@@ -44,7 +46,12 @@ app.get("/idnes", async function(req, res) {
 
 app.get("/bazos", async function(req, res) {
 	let scrappedData = [];
-	scrappedData.push(await bazos.scraping("https://reality.bazos.cz/inzerat/120852980/prodej-11-v-sokolove.php"));
+	scrappedData.push(await bazos.scraping("https://reality.bazos.cz/inzerat/120852980/prodej-11-v-sokolove.php"))
+});
+
+app.get("/hyperreality", async function(req, res) {
+	let scrappedData = [];
+	scrappedData.push(await hyperreality.scraping("https://www.hyperreality.cz/inzerat/detail/7696467-prodej-byt-2-1-54-m-sokolov-ul-sokolovska"));
 	res.send(scrappedData);
 });
 app.get("/viareality", async function(req, res) {
