@@ -26,7 +26,7 @@ const scraping = (url) => {
 				// extracting data
 				$(".property-title").filter(function() {
 					var data = $(this);
-					var title = data.children().first().text().trim();
+					var title = data.children().first().find("span.name.ng-binding").text().trim();
 					title = title.replace(/\n/g, "");
 					title = title.replace(/\t/g, "");
 					json.title = title;
