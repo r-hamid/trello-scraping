@@ -45,13 +45,8 @@ const scraping = (url) => {
 				nightmare = null;
 				resolve(json);
 			}).catch(err => {
-				reject(err);
+				resolve("");
 			});
-	});
-
-	nightmarePromise.catch( (err) => {
-		nightmare = null;
-		return err;
 	});
 
 	return nightmarePromise.then( (jsonObj) => {

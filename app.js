@@ -21,6 +21,12 @@ app.get("/", function(req, res) {
 
 });
 
+app.get("/sreality", async function(req, res) {
+	let scrappedData = {};
+	scrappedData = await nightmare.scraping("https://www.sreality.cz/detail/prodej/byt/1+kk/most-most-k--h--borovskeho/2581212764#img=0&fullscreen=false");
+	res.send(scrappedData);
+});
+
 //Starting server
 let port = 3000;
 app.listen(port, () => {
