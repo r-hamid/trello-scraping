@@ -36,8 +36,8 @@ const scraping = (url) => {
 					price = price.replace(/\t/g, "");
 					json.price = price;
 				});
-				$(".description > p").filter(function() {
-					var desc = $(this).text().trim();
+				$(".description").filter(function() {
+					var desc = $(this).text();
 					json.description = desc;
 				});
 				$("div.gallery > div.detail-images > div.image-cover > div.image.active > img").filter(function() {

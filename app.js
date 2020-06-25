@@ -17,6 +17,7 @@ app.get("/", function(req, res) {
 		}
 		else res.send("Something went wrong");
 	});
+
 });
 
 //Starting server
