@@ -1,6 +1,7 @@
 // Required Libraries
 const express = require("express");
 const trello = require("./trello/trello");
+const nightmare = require("./webScraping");
 
 // Defining variables and setting others to kick start the server
 const app = express();
@@ -17,6 +18,7 @@ app.get("/", function(req, res) {
 		}
 		else res.send("Something went wrong");
 	});
+
 });
 
 //Starting server
