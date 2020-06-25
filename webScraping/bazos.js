@@ -42,9 +42,9 @@ const scraping = (url) => {
 					json.customer.name = customerName.split(":")[1];
 				});
 
-				nightmare = null;
 				resolve(json);
 			}).catch(err => {
+				console.log(err.message);
 				resolve("");
 			});
 	});

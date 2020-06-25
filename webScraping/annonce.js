@@ -50,9 +50,9 @@ const scraping = (url) => {
 					json.customer.email = customerEmail.split(":")[1].trim();
 				});
 
-				nightmare = null;
 				resolve(json);
 			}).catch(err => {
+				console.log(err.message);
 				resolve("");
 			});
 	});

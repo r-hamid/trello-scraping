@@ -48,6 +48,9 @@ function saveAllCards(allCards) {
 				returnedPromise.then( () => {
 					if( (allCards.length -1) === index ) resolve();
 				});
+			} else {
+				console.log(card.id);
+				if( (allCards.length -1) === index ) resolve();
 			}
 			
 		});

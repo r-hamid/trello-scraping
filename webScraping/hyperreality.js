@@ -54,9 +54,9 @@ const scraping = (url) => {
 					json.customer.email = customerEmail;
 				});
 
-				nightmare = null;
 				resolve(json);
 			}).catch(err => {
+				console.log(err.message);
 				resolve("");
 			});
 	});

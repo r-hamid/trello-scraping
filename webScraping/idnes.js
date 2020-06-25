@@ -50,9 +50,10 @@ const scraping = (url) => {
 					console.log("Executed");
 				});
 
-				nightmare = null;
+				// nightmare = null;
 				resolve(json);
 			}).catch(err => {
+				console.log(err.message);
 				resolve("");
 			});
 	});
