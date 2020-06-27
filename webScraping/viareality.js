@@ -47,7 +47,6 @@ const scraping = (url) => {
 					json.customer.phone = customerPhone;
 				});
 
-				// nightmare = null;
 				resolve(json);
 			}).catch(err => {
 				resolve("");

@@ -25,7 +25,7 @@ const scraping = (url) => {
 				$(core + " > header.b-detail > h1.b-detail__title").filter(function() {
 					var title = $(this).text();
 					title = title.replace(/\r?\n|\r/g, "");
-					json.title = title;
+					json.title = title.trim();
 				});
 				$(core + " > div.b-desc > p:nth-of-type(1) ").filter(function() {
 					var desc = $(this).text().trim();
@@ -49,7 +49,6 @@ const scraping = (url) => {
 					json.customer.email = customerEmail;
 				});
 
-				// nightmare = null;
 				resolve(json);
 			}).catch(err => {
 				resolve("");
