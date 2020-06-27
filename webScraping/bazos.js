@@ -44,7 +44,6 @@ const scraping = (url) => {
 
 				resolve(json);
 			}).catch(err => {
-				console.log(err.message);
 				resolve("");
 			});
 	});

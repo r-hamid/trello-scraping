@@ -9,7 +9,7 @@ const scraping = (url) => {
 	const nightmarePromise = new Promise( (resolve, reject) => {
 		nightmare
 			.goto(url)
-			.wait("#page-layout > div.content-cover > div.content-inner > div.transcluded-content > div.ng-scope > div.property-detail > div.content > div > div.ng-isolate-scope[answer-form='resource'] > div.answer-form > div.contacts")
+			.wait("#page-layout > div.content-cover > div.content-inner > div.transcluded-content > div.ng-scope > div.property-detail > div.content > div > div.ng-isolate-scope[answer-form='resource'] > div.answer-form > div.contacts", 50000)
 			.wait(20000)
 			.click("#page-layout > div.content-cover > div.content-inner > div.transcluded-content > div.ng-scope > div.property-detail > div.content > div > div.ng-isolate-scope[answer-form='resource'] > div.answer-form > div.contacts > div.seller-contact > div.contacts > ul.contact-list > li.contact-item.phone > button.value.interactive")
 			.click("#page-layout > div.content-cover > div.content-inner > div.transcluded-content > div.ng-scope > div.property-detail > div.content > div > div.ng-isolate-scope[answer-form='resource'] > div.answer-form > div.contacts > div.seller-contact > div.contacts > ul.contact-list > li.contact-item.email > button.value.interactive")
@@ -57,7 +57,7 @@ const scraping = (url) => {
 				// nightmare = null;
 				resolve(json);
 			}).catch(err => {
-				console.log(err.message);
+				console.trace(err.message);
 				resolve("");
 			});
 	});

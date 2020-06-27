@@ -19,8 +19,8 @@ const scraping = (url) => {
 				const html = response;
 				var $ = cheerio.load(html);
 				var json = { title: "", picture: "", price: "", description: "", customer: { name: "", email: "", phone: "" } };
-
 				let core = ".pt-20 > div.row-main > div.m-auto.mw-860";
+
 				// extracting data
 				$(core + " > header.b-detail > h1.b-detail__title").filter(function() {
 					var title = $(this).text();
@@ -47,13 +47,11 @@ const scraping = (url) => {
 					json.customer.name = customerName;
 					json.customer.phone = customerPhone;
 					json.customer.email = customerEmail;
-					console.log("Executed");
 				});
 
 				// nightmare = null;
 				resolve(json);
 			}).catch(err => {
-				console.log(err.message);
 				resolve("");
 			});
 	});

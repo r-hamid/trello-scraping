@@ -50,7 +50,6 @@ const scraping = (url) => {
 				// nightmare = null;
 				resolve(json);
 			}).catch(err => {
-				console.log(err.message);
 				resolve("");
 			});
 	});

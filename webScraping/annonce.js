@@ -28,8 +28,10 @@ const scraping = (url) => {
 					json.title = title;
 				});
 				$(".join.e-rside.with-similar > div.e-rside-l > div#reality-detail > div.r > div.x.w290 > div.padded > div > p.ad-desc > span.ad-detail-desc-container").filter(function() {
-					var desc = $(this).text().trim();
-					json.description = desc;
+					if($(this).text()) {
+						var desc = $(this).text().trim();
+						json.description = desc;
+					}
 				});
 				$(".join.e-rside.with-similar > div.e-rside-l > div#reality-detail > div.r > div.b.carousel-medium > div.thumbnail > div.m-align > div > img").filter(function() {
 					var image = $(this).attr("src");
@@ -42,17 +44,22 @@ const scraping = (url) => {
 				});
 				$(".join.e-rside.with-similar > div.e-rside-l > div#reality-detail > div.r > div.x.w290 > div#contact-container").filter(function() {
 					let data = $(this);
-					let customerName = data.find("div:nth-of-type(1)").text().trim();
-					let customerPhone = data.find("div:nth-of-type(2)").text().trim();
-					let customerEmail = data.find("div:nth-of-type(5)").text().trim();
-					json.customer.name = customerName.split(":")[1].trim();
-					json.customer.phone = customerPhone.split(":")[1].trim();
-					json.customer.email = customerEmail.split(":")[1].trim();
+					if(data.find("h2").text()) {
+						let customerName = data.find("h2").text().trim();
+						json.customer.name = customerName;
+					}
+					if(data.find("div:nth-of-type(1)").text()) {
+						let customerPhone = data.find("div:nth-of-type(1) > a").text().trim();
+						json.customer.phone = customerPhone;
+					}
+					if(data.find("div:nth-of-type(2)").text()) {
+						let customerEmail = data.find("div:nth-of-type(2) > a").text().trim();
+						json.customer.email = customerEmail;
+					}
 				});
 
 				resolve(json);
 			}).catch(err => {
-				console.log(err.message);
 				resolve("");
 			});
 	});
